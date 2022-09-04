@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>blog 검색</title>
 </head>
+
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+<script>
+   $(document).ready(function(){
+       $("#search").click(function(){
+        $.ajax({
+        method: "GET",
+        url: "https://dapi.kakao.com/v2/search/image",
+        data: { query: $("#blogname").val() },
+        headers: { Authorization: "KakaoAK 26ed6aae306532aaaa1fab31b48340db" }
+    })
+        .done(function (msg) {
+            console.log(msg.documents[0].image_url);
+            $("p").append("<img src ='" + msg.documents[0].image_url + "'/>");
+        });
+       });
+   });
+</script>
+
 <body>
-    내 사이트임 ㅎㅇㅎㅇ
+    <h1>blog 검색</h1>
+    <input id="blogname" value="" type="text">
+    <button id="search"> 검색 </button>
+    <P>
+
+    </P>
 </body>
+
 </html>
