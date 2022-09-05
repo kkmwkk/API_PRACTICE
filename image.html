@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image search</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        $("#search").click(function(){
+            $.ajax({
+                method: "GET",
+                url: "https://dapi.kakao.com/v2/search/vclip",
+                data: { query : $("#imagesearch").val() },
+                headers: { Authorization: "KakaoAK 26ed6aae306532aaaa1fab31b48340db" }
+            })
+            .done(function( msg ) {
+                console.log(msg.documents[0].thumbnail);
+                $("p").append("<img src = '" + msg.documents[0].thumbnail + "'/>");
+        });
+    })
+})
+
+           
+</script>
+
+<body>
+    <h1>image</h1>
+    <input id = "imagesearch" value="" type = "text">
+    <button id = "search"> 검색 </button>
+
+    <p>
+
+    </p>
+    
+</body>
+</html>
